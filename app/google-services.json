@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "947747406892",
+    "project_id": "product-save",
+    "storage_bucket": "product-save.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947747406892:android:e5bfc2f61e7e98cc67bd89",
+        "android_client_info": {
+          "package_name": "com.mustafaguvenc.trendhere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947747406892-d00d0e8e5tsra7bf62abvs701h901reg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLStmEiswJPJsi0seS4QWWVY7C7RoDR3w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947747406892-d00d0e8e5tsra7bf62abvs701h901reg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

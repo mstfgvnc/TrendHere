@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.seller.ProductListSeller"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@mipmap/left_28998_640"
+                android:textSize="12dp"
+                android:layout_margin="5dp"/>
+            <Button
+                android:id="@+id/btnSellerEntry"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:text="YENİ ÜRÜN EKLE"
+                android:textSize="12dp"
+                android:layout_gravity="center"
+                />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+            <Spinner
+                android:id="@+id/spinnerCriterion"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+
+                />
+           <RadioGroup
+               android:id="@+id/radioGroup"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="1"
+               android:orientation="horizontal"
+               android:visibility="invisible">
+               <RadioButton
+                   android:id="@+id/upSorting"
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:text="Artan"
+                 />
+               <RadioButton
+                   android:id="@+id/downSorting"
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:text="Azalan"
+                />
+           </RadioGroup>
+
+
+        </LinearLayout>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/rcyProductListSeller"
+            android:layout_weight="30"
+            />
+
+    </LinearLayout>
+
+</layout>

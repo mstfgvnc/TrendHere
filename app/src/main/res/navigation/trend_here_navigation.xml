@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/trend_here_navigation"
+    app:startDestination="@id/productListClient">
+
+    <fragment
+        android:id="@+id/productListClient"
+        android:name="com.mustafaguvenc.trendhere.ui.client.ProductListClient"
+        android:label="ProductListClient" >
+        <action
+            android:id="@+id/action_productListClient_to_productListSeller"
+            app:destination="@id/productListSeller" />
+        <action
+            android:id="@+id/action_productListClient_to_productDetails"
+            app:destination="@id/productDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/productListSeller"
+        android:name="com.mustafaguvenc.trendhere.ui.seller.ProductListSeller"
+        android:label="ProductListSeller" >
+        <action
+            android:id="@+id/action_productListSeller_to_productAddAndEdit"
+            app:destination="@id/productAddAndEdit" />
+        <action
+            android:id="@+id/action_productListSeller_to_productListClient"
+            app:destination="@id/productListClient" />
+    </fragment>
+    <fragment
+        android:id="@+id/productAddAndEdit"
+        android:name="com.mustafaguvenc.trendhere.ui.seller.ProductAddAndEdit"
+        android:label="ProductAddAndEdit" >
+        <action
+            android:id="@+id/action_productAddAndEdit_to_productListSeller"
+            app:destination="@id/productListSeller" />
+        <argument
+            android:name="id"
+            app:argType="string"
+            app:nullable="true" />
+        <argument android:name="name"
+            app:argType="string"
+            app:nullable="true" />
+        <argument android:name="explanation"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="category"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="price"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetails"
+        android:name="com.mustafaguvenc.trendhere.ui.client.ProductDetails"
+        android:label="ProductDetails" >
+        <action
+            android:id="@+id/action_productDetails_to_productListClient"
+            app:destination="@id/productListClient" />
+    </fragment>
+</navigation>
