@@ -32,11 +32,7 @@
 
 
 
- ![enter image description here](https://github.com/mstfgvnc/soccerLeauge/blob/master/app/src/main/res/ss/ss1.jpg?raw=true)  ![enter image description here](https://github.com/mstfgvnc/soccerLeauge/blob/master/app/src/main/res/ss/ss2.jpg?raw=true) ![enter image description here](https://github.com/mstfgvnc/soccerLeauge/blob/master/app/src/main/res/ss/ss3.jpg?raw=true) ![enter image description here](https://github.com/mstfgvnc/soccerLeauge/blob/master/app/src/main/res/ss/ss4.jpg?raw=true) ![enter image description here](https://github.com/mstfgvnc/soccerLeauge/blob/master/app/src/main/res/ss/ss5.jpg?raw=true) ![enter image description here](https://github.com/mstfgvnc/soccerLeauge/blob/master/app/src/main/res/ss/ss6.jpg?raw=true)
-
-
-![enter image description here](https://github.com/mstfgvnc/SpaceDelivery/blob/master/app/src/main/assets/arch.png?raw=true)
-
+ ![enter image description here](https://github.com/mstfgvnc/TrendHere/blob/master/app/src/main/res/ss/ss1.jpg?raw=true)   ![enter image description here](https://github.com/mstfgvnc/TrendHere/blob/master/app/src/main/res/ss/ss2.jpg?raw=true)   ![enter image description here](https://github.com/mstfgvnc/TrendHere/blob/master/app/src/main/res/ss/ss3.jpg?raw=true)   ![enter image description here](https://github.com/mstfgvnc/TrendHere/blob/master/app/src/main/res/ss/ss4.jpg?raw=true)   ![enter image description here](https://github.com/mstfgvnc/TrendHere/blob/master/app/src/main/res/ss/ss5.jpg?raw=true)
 
 
 
