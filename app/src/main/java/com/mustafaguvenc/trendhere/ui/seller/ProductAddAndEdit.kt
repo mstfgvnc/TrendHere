@@ -30,7 +30,6 @@ class ProductAddAndEdit : Fragment() {
 
     val viewModel : ProductViewModel by viewModels()
 
-   // var database = FirebaseDatabase.getInstance().reference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +47,6 @@ class ProductAddAndEdit : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_product_add_and_edit, container, false)
     }
 
@@ -60,11 +58,11 @@ class ProductAddAndEdit : Fragment() {
         val currentDateTime = LocalDateTime.now()
         productDate=currentDateTime.format(DateTimeFormatter.ISO_DATE)
 
-        etProductDate.setText(productDate)
+        etProductDate.setText("Tarih : " +productDate)
         etProductCategory.setText(productCategory)
-        etProductId.setText(productId)
+        etProductId.setText("Ürün Kodu : " + productId)
         etProductExplanation.setText(productExplanation)
-        etProductName.setText(productCategory)
+        etProductName.setText(productName)
         etProductPrice.setText(productPrice)
 
         etProductDate.isEnabled  = false
@@ -90,8 +88,7 @@ class ProductAddAndEdit : Fragment() {
                 productName=etProductName.text.toString()
                 productPrice=etProductPrice.text.toString()
 
-              //  database.child(productId.toString()).setValue(ProductModel(productName,productCategory,productPrice,productExplanation,productDate))
-                viewModel.setDataInFirebase(productId.toString(),ProductModel(productName,productCategory,productPrice,productExplanation,productDate))
+                viewModel.setDataInFirebase(productId.toString(),ProductModel(productId.toString(),productName,productCategory,productPrice.toString().toDouble(),productExplanation,productDate))
                 val action = ProductAddAndEditDirections.actionProductAddAndEditToProductListSeller()
                 it.findNavController().navigate(action)
             }
@@ -103,9 +100,6 @@ class ProductAddAndEdit : Fragment() {
             val action = ProductAddAndEditDirections.actionProductAddAndEditToProductListSeller()
             it.findNavController().navigate(action)
         }
-
-
-
 
     }
 

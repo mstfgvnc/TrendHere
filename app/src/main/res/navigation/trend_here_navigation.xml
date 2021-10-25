@@ -59,5 +59,23 @@
         <action
             android:id="@+id/action_productDetails_to_productListClient"
             app:destination="@id/productListClient" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <argument
+            android:name="explanation"
+            app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+        <argument
+            android:name="price"
+            app:argType="string" />
     </fragment>
 </navigation>

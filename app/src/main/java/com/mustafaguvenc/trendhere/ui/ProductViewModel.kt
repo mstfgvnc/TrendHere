@@ -37,9 +37,10 @@ class ProductViewModel @Inject constructor
 
                         }else{
                             products.add(
-                                ProductModel(i.child("name").value.toString(),
+                                ProductModel(i.child("id").value.toString(),
+                                    i.child("name").value.toString(),
                                     i.child("category").value.toString(),
-                                    i.child("price").value.toString(),
+                                    i.child("price").value.toString().toDouble(),
                                     i.child("explanation").value.toString(),
                                     i.child("date").value.toString())
                             )
@@ -89,28 +90,14 @@ class ProductViewModel @Inject constructor
 
         }
 
-        fun getSortingTypes(){
+         fun deleteProduct(productId: String){
             launch {
-                val getSortingType = object  : ValueEventListener{
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                       for(i in snapshot.children){
-                           if(i.key.equals("sort")){
-                               sortType=i.child("sortType").value.toString()
-                               sortDirection=i.child("sortDirection").value.toString()
-                               println(sortType)
-                           }
-                       }
-                    }
+                 database.child(productId).removeValue()
+                 getData()
 
-                    override fun onCancelled(error: DatabaseError) {
-                    }
-
-                }
-              //  database.addValueEventListener(getSortingType)
-                database.addListenerForSingleValueEvent(getSortingType)
             }
 
-        }
+         }
 
 
     }

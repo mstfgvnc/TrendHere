@@ -19,18 +19,24 @@ import android.widget.TextView
 import android.widget.Toast
 import com.mustafaguvenc.trendhere.model.ProductModel
 import com.mustafaguvenc.trendhere.model.SortedModel
+import android.app.ListActivity
+
+import androidx.recyclerview.widget.RecyclerView
+
+import androidx.recyclerview.widget.ItemTouchHelper
+import kotlinx.android.synthetic.main.item_product.view.*
 
 
 class ProductListSeller : Fragment() {
 
 
     val viewModel : ProductViewModel by viewModels()
-    private val adapter= ProductListAdapter(arrayListOf(),false)
-    var productLastId = 0
+    private val adapter= ProductListAdapter(arrayListOf(),true)
     var strLastId =""
     var sortedType = ""
     var sortedDirection = ""
     val sortListSeller = arrayListOf<String>("Sıralama Ölçütü","Kategori","Fiyat")
+    var isFirstInitialize = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +50,6 @@ class ProductListSeller : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_product_list_seller, container, false)
     }
 
@@ -54,8 +59,11 @@ class ProductListSeller : Fragment() {
 
         rcyProductListSeller.layoutManager=LinearLayoutManager(context)
         rcyProductListSeller.adapter=adapter
-        viewModel.getData()
 
+        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
+        itemTouchHelper.attachToRecyclerView(rcyProductListSeller)
+
+        viewModel.getData()
 
         btnSellerEntry.setOnClickListener {
             val action = ProductListSellerDirections.actionProductListSellerToProductAddAndEdit(
@@ -73,53 +81,36 @@ class ProductListSeller : Fragment() {
         }
 
         val spinnerAdapter=createSpinnerAdapter()
-   //    val spinnerAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_dropdown_item,sortListSeller)
-
         spinnerAdapter.setDropDownViewResource(R.layout.spinner_item)
         spinnerCriterion.adapter=spinnerAdapter
 
-/*
-        viewModel.getSortingTypes()
-        println("burda")
-
-        if(viewModel.sortType.equals("Kategori")){
-            spinnerCriterion.setSelection(1)
-            println("kategori")
-        }else if(viewModel.sortType.equals("Fiyat")){
-            spinnerCriterion.setSelection(2)
-            println("fiyat")
-
-        }
-
-
- */
         spinnerCriterion.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if(p2!=0){
-                    sortedType=sortListSeller[p2]
-                    viewModel.setSortingTypes(SortedModel(sortedType,sortedDirection))
-                    radioGroup.visibility=View.VISIBLE
-                }else{
+               if(isFirstInitialize){
+                   isFirstInitialize=false
 
-                    radioGroup.visibility=View.INVISIBLE
-                }
+                   }else{
+                   if(p2!=0){
+                       sortedType=sortListSeller[p2]
+                       viewModel.setSortingTypes(SortedModel(sortedType,sortedDirection))
+                       radioGroup.visibility=View.VISIBLE
+                   }else{
+
+                       radioGroup.visibility=View.INVISIBLE
+                        }
+                   }
 
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
 
             }
 
-
         }
-
-
-
 
         upSorting.setOnClickListener {
             sortedDirection="up"
             viewModel.setSortingTypes(SortedModel(sortedType,sortedDirection))
-
         }
 
         downSorting.setOnClickListener {
@@ -129,22 +120,28 @@ class ProductListSeller : Fragment() {
         }
 
         observeLiveData()
-/*
-        if(viewModel.sortType.equals("Kategori")){
-            spinnerCriterion.setSelection(1)
-        }else if(viewModel.sortType.equals("Fiyat")){
-            spinnerCriterion.setSelection(2)
-        }
-
-
- */
 
     }
 
     fun observeLiveData(){
         viewModel.productList.observe(viewLifecycleOwner,{
+
             adapter.updateProductList(it)
-        //    spinnerCriterion.setSelection(2)
+
+            sortedDirection=viewModel.sortDirection
+            sortedType=viewModel.sortType
+            if(sortedDirection.equals("up")){
+                radioGroup.check(upSorting.id)
+            }else if(sortedDirection.equals("down")){
+                radioGroup.check(downSorting.id)
+            }
+            if(sortedType.equals("Kategori")){
+                spinnerCriterion.setSelection(1)
+            }else if(sortedType.equals("Fiyat")){
+                spinnerCriterion.setSelection(2)
+            }
+
+
         })
         viewModel.productLastId.observe(viewLifecycleOwner,{
             strLastId = it.toString()
@@ -168,7 +165,6 @@ class ProductListSeller : Fragment() {
                 val view=  super.getDropDownView(position, convertView, parent)
                 val tv = view as TextView
                 if (position == 0) {
-                    // Set the hint text color gray
                     tv.setTextColor(Color.GRAY)
                 } else {
                     tv.setTextColor(Color.BLACK)
@@ -180,5 +176,24 @@ class ProductListSeller : Fragment() {
         return spinnerAdapter
     }
 
+    var simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object :
+        ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT
+        ) {
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
+            return false
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
+
+          viewModel.deleteProduct(viewHolder.itemView.productId.text.toString())
+
+        }
+    }
 
 }
