@@ -32,7 +32,7 @@ class ProductDetails : Fragment() {
             productDate.text="Tarih : " +ProductDetailsArgs.fromBundle(it).date
             productId.text="Ürün Kodu : " +ProductDetailsArgs.fromBundle(it).id
             productName.text="Ürün Adı : " +ProductDetailsArgs.fromBundle(it).name
-            productPrice.text="Fiyat : " +ProductDetailsArgs.fromBundle(it).price
+            productPrice.text="Fiyat : " +ProductDetailsArgs.fromBundle(it).price+" TL"
             productExplanation.text="Açıklama : " +ProductDetailsArgs.fromBundle(it).explanation
 
         }

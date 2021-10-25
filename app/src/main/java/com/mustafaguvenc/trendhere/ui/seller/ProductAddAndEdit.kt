@@ -17,6 +17,8 @@ import com.mustafaguvenc.trendhere.ui.ProductViewModel
 import kotlinx.android.synthetic.main.fragment_product_add_and_edit.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import android.text.InputFilter
+import android.text.InputFilter.AllCaps
 
 
 class ProductAddAndEdit : Fragment() {
@@ -59,6 +61,7 @@ class ProductAddAndEdit : Fragment() {
         productDate=currentDateTime.format(DateTimeFormatter.ISO_DATE)
 
         etProductDate.setText("Tarih : " +productDate)
+        etProductCategory.setFilters(arrayOf<InputFilter>(AllCaps()))
         etProductCategory.setText(productCategory)
         etProductId.setText("Ürün Kodu : " + productId)
         etProductExplanation.setText(productExplanation)
