@@ -16,13 +16,8 @@ import com.mustafaguvenc.trendhere.ui.ProductListAdapter
 import com.mustafaguvenc.trendhere.ui.ProductViewModel
 import kotlinx.android.synthetic.main.fragment_product_list_seller.*
 import android.widget.TextView
-import android.widget.Toast
-import com.mustafaguvenc.trendhere.model.ProductModel
 import com.mustafaguvenc.trendhere.model.SortedModel
-import android.app.ListActivity
-
 import androidx.recyclerview.widget.RecyclerView
-
 import androidx.recyclerview.widget.ItemTouchHelper
 import kotlinx.android.synthetic.main.item_product.view.*
 
@@ -127,6 +122,8 @@ class ProductListSeller : Fragment() {
         viewModel.productList.observe(viewLifecycleOwner,{
 
             adapter.updateProductList(it)
+            rcyProductListSeller.visibility=View.VISIBLE
+            viewModel.loading.value=false
 
             sortedDirection=viewModel.sortDirection
             sortedType=viewModel.sortType
@@ -146,6 +143,33 @@ class ProductListSeller : Fragment() {
         viewModel.productLastId.observe(viewLifecycleOwner,{
             strLastId = it.toString()
         })
+        viewModel.loading.observe(viewLifecycleOwner,  {loading ->
+            loading?.let {
+                if(it){
+
+                    progressLoadingSeller.visibility=View.VISIBLE
+                    rcyProductListSeller.visibility=View.GONE
+                    tvErrorSeller.visibility=View.GONE
+
+                }else{
+                    progressLoadingSeller.visibility=View.GONE
+                }
+
+            }
+        })
+        viewModel.errorDatabase.observe(viewLifecycleOwner,  {
+            it.let {
+                if(it){
+                    tvErrorSeller.visibility=View.VISIBLE
+                    tvErrorSeller.setText(viewModel.errorDetails)
+
+                }else{
+                    tvErrorSeller.visibility=View.GONE
+
+                }
+            }
+        })
+
     }
 
     fun createSpinnerAdapter():ArrayAdapter<String>{

@@ -51,6 +51,35 @@ class ProductListClient : Fragment() {
     fun observeLiveData(){
         viewModel.productList.observe(viewLifecycleOwner,{
             adapter.updateProductList(it)
+            rcyProductListClient.visibility=View.VISIBLE
+            viewModel.loading.value=false
+        })
+
+        viewModel.loading.observe(viewLifecycleOwner,  {loading ->
+            loading?.let {
+                if(it){
+
+                    progressLoadingClient.visibility=View.VISIBLE
+                    rcyProductListClient.visibility=View.GONE
+                    tvErrorClient.visibility=View.GONE
+
+                }else{
+                    progressLoadingClient.visibility=View.GONE
+                }
+
+            }
+        })
+        viewModel.errorDatabase.observe(viewLifecycleOwner,  {
+            it.let {
+                if(it){
+                    tvErrorClient.visibility=View.VISIBLE
+                    tvErrorClient.setText(viewModel.errorDetails)
+
+                }else{
+                    tvErrorClient.visibility=View.GONE
+
+                }
+            }
         })
     }
 

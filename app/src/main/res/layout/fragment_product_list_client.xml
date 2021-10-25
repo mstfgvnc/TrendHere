@@ -35,14 +35,29 @@
                 />
 
         </LinearLayout>
-
-
-        <androidx.recyclerview.widget.RecyclerView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:id="@+id/rcyProductListClient"
-            android:layout_weight="30"
-            />
+            android:layout_weight="30">
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rcyProductListClient"
+                />
+            <ProgressBar
+                android:id="@+id/progressLoadingClient"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"/>
+            <TextView
+                android:id="@+id/tvErrorClient"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                />
+        </RelativeLayout>
+
+
 
     </LinearLayout>
 

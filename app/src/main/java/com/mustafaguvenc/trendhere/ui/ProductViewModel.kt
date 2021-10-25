@@ -20,11 +20,15 @@ class ProductViewModel @Inject constructor
     var database = FirebaseDatabase.getInstance().reference
     val productList = MutableLiveData<List<ProductModel>>()
     val productLastId= MutableLiveData<Int>()
+    val loading = MutableLiveData<Boolean>()
+    val errorDatabase = MutableLiveData<Boolean>()
     var sortType=""
     var sortDirection=""
+    var errorDetails=""
 
         fun getData(){
         launch {
+            loading.value=true
             val getProducts = object  : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val products = arrayListOf<ProductModel>()
@@ -64,7 +68,9 @@ class ProductViewModel @Inject constructor
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+                    loading.value=false
+                    errorDatabase.value=true
+                    errorDetails=error.details
                 }
 
             }
